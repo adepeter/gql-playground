@@ -1,22 +1,32 @@
 import graphene
 
 
+class BaseUserInputMixin(graphene.InputObjectType):
+    id = graphene.ID()
+    slug = graphene.String()
+
+
 class UserCreateInput(graphene.InputObjectType):
+    id = graphene.ID
     email = graphene.String()
     username = graphene.String()
     password = graphene.String()
 
 
-class UserDeleteInput(graphene.InputObjectType):
-    id = graphene.Int()
-    slug = graphene.String()
+class UserBasicPatchInput(graphene.InputObjectType):
+    email = graphene.String()
+    dob = graphene.Date()
 
 
-class UserEditPatchInput(graphene.InputObjectType):
-    dob = graphene.String()
+class UserBasicEditInput(BaseUserInputMixin):
+    patch = graphene.InputField(UserBasicPatchInput)
 
 
-class UserEditInput(graphene.InputObjectType):
-    id = graphene.Int()
-    slug = graphene.String()
-    patch = graphene.InputField(UserEditPatchInput)
+class UserPasswordChangePatchInput(graphene.InputObjectType):
+    old_password = graphene.String()
+    new_password = graphene.String()
+    repeated_password = graphene.String()
+
+
+class UserPasswordChangeEditInput(BaseUserInputMixin):
+    patch = graphene.InputField(UserPasswordChangePatchInput)

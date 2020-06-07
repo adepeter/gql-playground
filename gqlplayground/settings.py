@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Graphene django library
     'graphene_django',
+    'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
 
     # GQL PLAYGROUND APPS
     'gqlapps.blogs.apps.BlogsConfig',
@@ -130,8 +131,19 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'users.User'
 
 AUTHENTICATION_BACKENDS = [
+    'graphql_jwt.backends.JSONWebTokenBackend',
     'django.contrib.auth.backends.ModelBackend',
     'gqlapps.users.authentication_backend.AuthenticationBackend',
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+GRAPHENE = {
+    'MIDDLEWARE': [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ],
+}
+
+GRAPHQL_JWT = {
+    'JWT_ALLOW_ARGUMENT': True,
+}

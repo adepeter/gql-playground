@@ -1,9 +1,9 @@
-type Category {
+type CategoryType {
     id: ID!,
     name: String!,
     slug: String,
     description: String,
-    threads: [Thread]
+    threads: [ThreadType]
 }
 
 input CategoryCreateInput {
@@ -35,7 +35,7 @@ type CategoryCreatePayload {
 }
 
 type CategoryDeletePayload {
-    category: [Category]
+    category: [CategoryType]
 }
 
 type CategoryEditPayload {
@@ -49,8 +49,8 @@ type Mutation {
 }
 
 type Query {
-    getAllCategories() categories: [Category],
-    getCategoryByIdAndSlug(id: ID!, slug: String!) category(id, slug): [Thread]
+    getAllCategories() categories: [CategoryType],
+    getCategoryByIdAndSlug(id: ID!, slug: String!) category(id, slug): CategoryType!
 }
 
 schema {

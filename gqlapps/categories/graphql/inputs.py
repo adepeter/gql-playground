@@ -13,7 +13,7 @@ class CategoryCreateInput(BaseCategoryInputMixin):
     name = graphene.String()
     slug = graphene.String()
     description = graphene.String()
-    parent = graphene.Field(lambda: CategoryCreateInput)
+    parent = graphene.InputField(lambda: CategoryCreateInput)
 
 
 class CategoryPatchInput(CategoryCreateInput):

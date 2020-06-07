@@ -15,6 +15,7 @@ type User {
 }
 
 input UserCreateInput {
+    id: ID!,
     email: String!,
     username: String!,
     slug: String
@@ -28,7 +29,8 @@ input UserEditInput {
 
 input UserDeleteInput {
     id: ID!,
-    slug: String
+    slug: String!,
+    password: String!
 }
 
 type Query {

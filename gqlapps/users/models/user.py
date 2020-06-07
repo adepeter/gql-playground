@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 from ..managers.user import UserManager
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name=_('e-mail'),
@@ -57,6 +58,17 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def display_age(self):
         if self.dob:
-            now = timezone.now()
-            years = now - self.dob
+            now = timezone.now().date()
+            years = now.year - self.dob.year
 
+    @property
+    def is_authenticated(self):
+        return True
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['email', 'username'],
+                name='user_unique_email_username'
+            )
+        ]

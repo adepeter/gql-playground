@@ -4,5 +4,8 @@ from ...categories.models import Category
 
 
 class CategoryType(DjangoObjectType):
+
     class Meta:
         model = Category
+
+

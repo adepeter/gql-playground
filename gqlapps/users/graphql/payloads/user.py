@@ -4,8 +4,8 @@ import graphene
 
 from ..inputs.user import (
     UserCreateInput,
-    UserDeleteInput,
-    UserEditInput
+    # UserDeleteInput,
+    # UserEditInput
 )
 from ..types.user import UserType
 
@@ -29,26 +29,26 @@ class UserCreatePayload(graphene.Mutation):
         return UserCreatePayload(user=user, is_created=is_created)
 
 
-class UserDeletePayload(graphene.Mutation):
-    users = graphene.List(UserType)
-    is_deleted = graphene.Boolean()
-
-    class Arguments:
-        input = UserDeleteInput(required=True)
-
-    def mutate(self, info, input=None):
-        pass
-
-    def resolve_users(self, info, **kwargs):
-        pass
-
-
-class UserEditPayload(graphene.Mutation):
-    user = graphene.Field(UserType)
-    is_edited = graphene.Boolean()
-
-    class Arguments:
-        input = UserEditInput(required=True)
-
-    def mutate(self, info, input=None):
-        pass
+# class UserDeletePayload(graphene.Mutation):
+#     users = graphene.List(UserType)
+#     is_deleted = graphene.Boolean()
+#
+#     class Arguments:
+#         input = UserDeleteInput(required=True)
+#
+#     def mutate(self, info, input=None):
+#         pass
+#
+#     def resolve_users(self, info, **kwargs):
+#         pass
+#
+#
+# class UserEditPayload(graphene.Mutation):
+#     user = graphene.Field(UserType)
+#     is_edited = graphene.Boolean()
+#
+#     class Arguments:
+#         input = UserEditInput(required=True)
+#
+#     def mutate(self, info, input=None):
+#         pass
